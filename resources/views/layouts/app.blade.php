@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,65 +17,93 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light shadow" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32">
+                    <img src="{{ asset('storage/img/logo.png') }}" width="48" alt="" />
+                </svg>
+                <span class="fs-4">Prestamos</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link active " aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-house"></i></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('prestamos.index') }}" class="nav-link text-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-bank"></i></svg>
+                        Prestamos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('pagos.index') }}" class="nav-link link-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-coin"></i></svg>
+                        Pagos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('clientes.index') }}" class="nav-link link-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-people"></i></svg>
+                        Clientes
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reportes') }}" class="nav-link link-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"><i
+                                class="bi bi-file-earmark-text"></i></svg>
+                        Reportes
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://i.pinimg.com/564x/8f/b1/4e/8fb14e64130f949b48d22d8809ad7d49.jpg" alt=""
+                        class="rounded-circle me-2" width="32" height="32">
+                    <strong>{{ Auth::user()->name }}</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('signout') }}">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+        <div class="container m-4">
+            <div class="container  bg-white rounded shadow">
+                <div class="row aling-items-stretch">
+                    <div class="bg-white p-3 rounded-end">
+                        
+                        <div class="text-end">
+                            <img src="{{ asset('storage/img/logo.png') }}" width="48" alt="">
+                        </div>
 
-                    </ul>
+                        @if (Session::has('message'))
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                {{ Session::get('message') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                        @yield('content')
+                    </div>
                 </div>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        </div>
     </div>
 </body>
+
 </html>
