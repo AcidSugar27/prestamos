@@ -5,7 +5,7 @@
 
     <h2 class="fw-blod text-center py-3">Clientes</h2>
     <!-- Form -->
-    <div class="table-responsive">
+    <div class="table-responsive" id="tablaClientes">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -15,7 +15,9 @@
                     <th scope="col">Cedula</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
-                    <th class="d-flex align-middle justify-content-center"><button class="btn btn-primary" onclick="window.print()">Imprimir</button></th>
+                    <th class="d-flex align-middle justify-content-center">
+                        <button class="btn btn-primary" onclick="imprimir('tablaClientes')">Imprimir</button>
+                    </th>
                 </tr>
             </thead>
             <tbody>

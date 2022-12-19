@@ -141,7 +141,7 @@
 @push('JS')
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
-
+            
             var options = {
                 series: [{
                     name: 'Net Profit',
@@ -194,9 +194,6 @@
 
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
-
-
-
         });
     </script>
 @endpush

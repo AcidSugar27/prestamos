@@ -5,7 +5,7 @@
 
     <h2 class="fw-blod text-center py-3">Pagos</h2>
     <!-- Form -->
-    <div class="table-responsive">
+    <div class="table-responsive" id="tablaPagos">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -13,7 +13,7 @@
                     <th scope="col">ID Prestamo</th>
                     <th scope="col">Monto Pagado</th>
                     <th scope="col">Fecha De Abono</th>
-                    <th><button class="btn btn-primary" onclick="window.print()">Imprimir</button></th>
+                    <th><button class="btn btn-primary" onclick="imprimir('tablaPagos')">Imprimir</button></th>
                 </tr>
             </thead>
             <tbody>
