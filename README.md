@@ -27,7 +27,7 @@ composer install
 npm install
 ```
 
-Este comando es para crear un acceso directo al directorio storage el cual es privado.
+Este comando es para crear un acceso directo al directorio storage el cual es privado
 ```cmd
 php artisan storage:link
 ```
