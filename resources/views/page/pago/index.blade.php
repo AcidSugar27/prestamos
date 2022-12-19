@@ -13,7 +13,7 @@
                     <th scope="col">ID Prestamo</th>
                     <th scope="col">Monto Pagado</th>
                     <th scope="col">Fecha De Abono</th>
-                    <th>Acciones</th>
+                    <th><button class="btn btn-primary" onclick="window.print()">Imprimir</button></th>
                 </tr>
             </thead>
             <tbody>

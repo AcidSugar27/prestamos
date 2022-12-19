@@ -21,23 +21,23 @@
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light shadow" style="width: 280px;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light shadow vh-100" style="width: 280px; ">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32">
-                    <img src="{{ asset('storage/img/logo.png') }}" width="48" alt="" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/3141/3141991.png" width="48" alt="" />
                 </svg>
                 <span class="fs-4">Prestamos</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link active " aria-current="page">
+                    <a href="{{ route('dashboard') }}" class="nav-link link-dark " aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-house"></i></svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('prestamos.index') }}" class="nav-link text-dark">
+                    <a href="{{ route('prestamos.index') }}" class="nav-link link-dark">
                         <svg class="bi pe-none me-2" width="16" height="16"><i class="bi bi-bank"></i></svg>
                         Prestamos
                     </a>
@@ -81,13 +81,12 @@
             </div>
         </div>
 
-        <div class="container m-4">
+        <div class="container ">
             <div class="container  bg-white rounded shadow">
                 <div class="row aling-items-stretch">
                     <div class="bg-white p-3 rounded-end">
-                        
                         <div class="text-end">
-                            <img src="{{ asset('storage/img/logo.png') }}" width="48" alt="">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3141/3141991.png" width="48" alt="">
                         </div>
 
                         @if (Session::has('message'))

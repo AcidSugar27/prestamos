@@ -5,7 +5,7 @@
     </div>
     <div class="col bg-white p-5 rounded-end">
         <div class="text-end">
-            <img src="{{ asset('storage/img/logo.png') }}" width="48" alt="">
+            <img src="https://i.pinimg.com/564x/24/52/bb/2452bbe587887f2f446dc9451e3eb19a.jpg" width="48" alt="">
         </div>
         <h2 class="fw-blod text-center py-5">Bienvenido</h2>
         <!-- login -->

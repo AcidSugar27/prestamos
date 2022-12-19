@@ -15,7 +15,7 @@
                     <th scope="col">Cedula</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
-                    <th></th>
+                    <th class="d-flex align-middle justify-content-center"><button class="btn btn-primary" onclick="window.print()">Imprimir</button></th>
                 </tr>
             </thead>
             <tbody>

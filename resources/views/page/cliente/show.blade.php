@@ -11,7 +11,7 @@
     <br>
     <span class="fs-3">Email: {{ $cliente->email}}</span>
     <br>
-    <span class="fs-3">Direccion: {{ $cliente->direccion}}%</span>
+    <span class="fs-3">Direccion: {{ $cliente->direccion}}</span>
     <br>
     <span class="fs-3">Estado Civil: {{ $cliente->estado_civil}}</span>
 @endsection
