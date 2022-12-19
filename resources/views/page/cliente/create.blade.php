@@ -44,7 +44,7 @@
                     <div class="col-12">
                         <label for="cedula" class="form-label">Cedula</label>
                         <div class="input-group has-validation">
-                            <input  type="text" name="cedula" id="cedula" placeholder="Cedula"
+                            <input  type="number" name="cedula" id="cedula" placeholder="Cedula"
                                     value="@isset($cliente->cedula) {{ $cliente->cedula }} @else {{ old('cedula') }} @endisset"
                                     class="form-control @error('cedula') is-invalid @enderror">
                             @error('cedula')
@@ -61,7 +61,7 @@
                     <div class="col-sm-12">
                         <label for="telefono" class="form-label">Telefono</label>
                         <div class="input-group has-validation">
-                            <input  type="text" name="telefono" id="telefono" placeholder="Telefono"
+                            <input  type="tel" name="telefono" id="telefono" placeholder="Telefono"
                                     value="@isset($cliente->telefono) {{ $cliente->telefono }} @else {{ old('telefono') }} @endisset"
                                     class="form-control @error('telefono') is-invalid @enderror">
                             @error('telefono')
