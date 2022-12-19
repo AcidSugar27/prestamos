@@ -27,6 +27,10 @@ composer install
 npm install
 ```
 
+Este comando es para crear un acceso directo al directorio storage el cual es privado
+```cmd
+php artisan storage:link
+```
 Seguidamente recuerda que por seguridad el archivo <b>"<em>.env</em>"</b> no se copia, para ello dispones del mismo pero con el nombre <b>"<em>.env.example</em>"</b> el cual deberás renombrar a <b>"<em>.env</em>"</b> solamente.
 
 Recuerda también ingresar en el archivo <b>"<em>.env</b>"</em> los datos de conexión a la base de datos que deberás haber creado previamente.

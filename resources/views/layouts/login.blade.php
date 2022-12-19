@@ -22,7 +22,7 @@
             background: linear-gradient(to right,#b044f7,#9f18f9 );
         }
         .bg{
-            background-image: url(/storage/img/logo.png);
+            background-image: url(https://i.pinimg.com/564x/24/52/bb/2452bbe587887f2f446dc9451e3eb19a.jpg);
             background-position: center center;
         }
     </style>

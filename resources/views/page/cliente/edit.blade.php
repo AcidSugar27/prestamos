@@ -6,7 +6,7 @@
     <!-- Form -->
     <div class="row g-5 ">
         <div class="">
-            <form class="needs-validation" method="POST" action="{{ route('clientes.update', $cliente) }}">
+            <form class="needs-validation" method="POST" action="{{ route('clientes.update', $cliente->id) }}">
                 @csrf
                 @method('PUT')
                 <div class="row g-3 pb-5">

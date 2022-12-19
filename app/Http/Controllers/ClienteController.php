@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -25,7 +26,7 @@ class ClienteController extends Controller
             [
                 "nombre"    => "required|max:100",
                 "apellido"  => "required|max:100",
-                "cedula"    => "required|max:20",
+                "cedula"    => "required|numeric",
                 "telefono"  => "required|max:18",
                 "email"     => "required|max:100",
                 "direccion" => "required|max:100",
@@ -66,7 +67,7 @@ class ClienteController extends Controller
             [
                 "nombre"    => "required|max:100",
                 "apellido"  => "required|max:100",
-                "cedula"    => "required|max:20",
+                "cedula"    => "required|numeric",
                 "telefono"  => "required|max:18",
                 "email"     => "required|max:100",
                 "direccion" => "required|max:100",
@@ -95,5 +96,12 @@ class ClienteController extends Controller
         Session::flash('message',"El cliente $cliente->nombre $cliente->apellido Fue Eliminado");
         $cliente->delete();
         return redirect()->route('clientes.index');
+    }
+
+    public function api( Request $request )
+    {
+        $cedula = $request->input('cedula');
+        $cliente = Cliente::where('cedula','=',$cedula)->get();
+        return $cliente->toJson();
     }
 }

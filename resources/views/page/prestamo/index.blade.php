@@ -5,7 +5,7 @@
 
     <h2 class="fw-blod text-center py-3">Prestamos</h2>
     <!-- Form -->
-    <div class="table-responsive">
+    <div class="table-responsive" id="tablaPrestamos">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -13,11 +13,17 @@
                     <th scope="col">ID Cliente</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Monto</th>
-                    <th scope="col">Pagado</th>
                     <th scope="col">Interes</th>
+                    <th scope="col">Cantidad a Pagar</th>
+                    <th scope="col">Cantidad a Pagar mensual</th>
+                    <th scope="col">Pagado</th>
                     <th scope="col">Plazo</th>
                     <th scope="col">Estado</th>
-                    <th></th>
+                    <th class="d-flex align-middle justify-content-center">
+                        <button class="btn btn-primary" onclick="imprimir('tablaPrestamos')">
+                            Imprimir
+                        </button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +42,16 @@
                             {{ $prestamo->monto }}
                         </td>
                         <td class="align-middle">
-                            {{ $prestamo->pagado }}
+                            {{ $prestamo->interes }} %
                         </td>
                         <td class="align-middle">
-                            {{ $prestamo->interes }} %
+                            {{ $prestamo->monto + ($prestamo->monto / 100) * $prestamo->interes }}.00
+                        </td>
+                        <td class="align-middle">
+                            {{( $prestamo->monto + ($prestamo->monto / 100) * $prestamo->interes) /  $prestamo->plazo  }}
+                        </td>
+                        <td class="align-middle">
+                            {{ $prestamo->pagado }}
                         </td>
                         <td class="align-middle">
                             {{ $prestamo->plazo }} meses

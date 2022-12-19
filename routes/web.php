@@ -27,9 +27,14 @@ Route::middleware(['auth'])->group(function () {
         return redirect('/login');
     })->name('signout');
     
+   
+
     Route::resources([
         'clientes' => ClienteController::class,
         'prestamos' => PrestamoController::class,
         'pagos' => PagoController::class
     ]);
 });
+
+// API
+Route::get('/client',[ClienteController::class, 'api']);
