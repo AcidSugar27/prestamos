@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_prestamo')
-            ->references('id')->on('prestamos')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+                ->references('id')->on('prestamos')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
