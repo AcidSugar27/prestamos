@@ -12,32 +12,26 @@
                 <div class="row g-3 pb-5">
                     <div class="col-sm-6">
                         <label for="validationCustom01" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" id="validationCustom01" placeholder="Nombre"
-                            value="@isset($cliente->nombre) {{ $cliente->nombre }} @else {{ old('nombre') }} @endisset"
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre') }}"
                             class="form-control @error('nombre') is-invalid @enderror">
-                        @error('nombre')
-                            <div class="invalid-feedback">
-                                Nombre es requerido.
-                            </div>
-                        @enderror
+                        <div class="invalid-feedback">
+                            Campo Invalido @error('nombre') {{ $message }} @enderror
+                        </div>
                         <div class="valid-feedback">
-                            Looks good!
+                            Correcto !
                         </div>
 
                     </div>
 
                     <div class="col-sm-6">
                         <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" name="apellido" id="apellido" placeholder="Apellido"
-                            value="@isset($cliente->apellido) {{ $cliente->apellido }} @else {{ old('apellido') }} @endisset"
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" value="{{ old('apellido') }}"
                             class="form-control @error('apellido') is-invalid @enderror">
-                        @error('apellido')
-                            <div class="invalid-feedback">
-                                Apellido es requerido
-                            </div>
-                        @enderror
+                        <div class="invalid-feedback">
+                            Campo Invalido @error('apellido') {{ $message }} @enderror
+                        </div>
                         <div class="valid-feedback">
-                            Looks good!
+                            Correcto !
                         </div>
                     </div>
 
@@ -45,16 +39,13 @@
                         <label for="cedula" class="form-label">Cedula</label>
                         <div class="input-group has-validation">
                             <input type="number" name="cedula" id="cedula" placeholder="Cedula"
-                                value="@isset($cliente->cedula) {{ $cliente->cedula }} @else {{ old('cedula') }} @endisset"
+                                value="{{ old('cedula') }}"
                                 class="form-control @error('cedula') is-invalid @enderror">
                             <div class="invalid-feedback">
-                                Formato Invalido: 
-                                @error('cedula')
-                                    {{ $message }}
-                                @enderror
+                                Formato Invalido @error('cedula') {{ $message }} @enderror
                             </div>
                             <div class="valid-feedback">
-                                Formato Valido
+                                Correcto !
                             </div>
                         </div>
                     </div>
@@ -63,15 +54,13 @@
                         <label for="telefono" class="form-label">Telefono</label>
                         <div class="input-group has-validation">
                             <input type="tel" name="telefono" id="telefono" placeholder="Telefono"
-                                value="@isset($cliente->telefono) {{ $cliente->telefono }} @else {{ old('telefono') }} @endisset"
+                                value="{{ old('telefono') }}" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                                 class="form-control @error('telefono') is-invalid @enderror">
-                            @error('telefono')
-                                <div class="invalid-feedback">
-                                    Telefono es requerido
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback">
+                                Formato Invalido @error('telefono') {{ $message }} @enderror
+                            </div>
                             <div class="valid-feedback">
-                                Looks good!
+                                Correcto !
                             </div>
                         </div>
                     </div>
@@ -79,30 +68,26 @@
                     <div class="col-12">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" placeholder="you@example.com"
-                            value="@isset($cliente->email) {{ $cliente->email }} @else {{ old('email') }} @endisset"
+                            value="{{ old('email') }}"
                             class="form-control @error('email') is-invalid @enderror">
-                        @error('email')
-                            <div class="invalid-feedback">
-                                Por favor introduce un email valido.
-                            </div>
-                        @enderror
+                        <div class="invalid-feedback">
+                            Formato Invalido @error('email') {{ $message }} @enderror
+                        </div>
                         <div class="valid-feedback">
-                            Looks good!
+                            Correcto!
                         </div>
                     </div>
 
                     <div class="col-12">
                         <label for="direccion" class="form-label">Direccion</label>
                         <input type="text" name="direccion" id="direccion" placeholder="1234 Main St"
-                            value="@isset($cliente->direccion) {{ $cliente->direccion }} @else {{ old('direccion') }} @endisset"
+                            value="{{ old('direccion') }}"
                             class="form-control @error('direccion') is-invalid @enderror">
-                        @error('direccion')
-                            <div class="invalid-feedback">
-                                Por favor introduce una direccion.
-                            </div>
-                        @enderror
+                        <div class="invalid-feedback">
+                            Formato Invalido @error('direccion') {{ $message }} @enderror
+                        </div>
                         <div class="valid-feedback">
-                            Looks good!
+                            Correcto!
                         </div>
                     </div>
 
@@ -149,23 +134,60 @@
     <script>
         // CUANDO EL DOCUMENTO HAYA CARGADO
         document.addEventListener("DOMContentLoaded", function(event) {
+            // VALIDAMOS EL INPUT NOMBRE
+            $('#nombre').change( function(){
+                if( esAlfabetica( $(this).val() ) ){
+                    $(this).addClass('is-valid');
+                    $(this).removeClass('is-invalid');
+                }
+                else
+                {
+                    $(this).addClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
+            });
+
+            $('#apellido').change( function(){
+                if( esAlfabetica( $(this).val() ) ){
+                    $(this).addClass('is-valid');
+                    $(this).removeClass('is-invalid');
+                }
+                else
+                {
+                    $(this).addClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
+            });
+
             // VALIDAMOS EL INPUT CEDULA CADA VEZ QUE SE DISPARA EL EVENTO ON CHANGE
             $("#cedula").change(function(){
 
                 if( esCedulaValida(this.value) === true )
                 {
-                    $("#cedula").addClass('is-valid');
-                    $("#cedula").removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    $(this).removeClass('is-invalid');
                 }
                 else
                 {
-                    $("#cedula").addClass('is-invalid');
-                    $("#cedula").removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    $(this).removeClass('is-valid');
                 }
             });
 
-            // VALIDAMOS EL INPUT MONTO CADA VEZ QUE SE DISPARA EL EVENTO ON CHANGE
-
+            // VALIDAMOS EL INPUT TELEFONO CADA VEZ QUE SE DISPARA EL EVENTO ON CHANGE
+            $("#telefono").change(function(){
+   
+                if( esTelefonoValido(this.value) === true )
+                {
+                    $(this).addClass('is-valid');
+                    $(this).removeClass('is-invalid');
+                }
+                else
+                {
+                    $(this).addClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
+            });
         });
     </script>
 @endpush
