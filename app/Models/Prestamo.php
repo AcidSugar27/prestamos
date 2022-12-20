@@ -13,6 +13,7 @@ class Prestamo extends Model
         'id_cliente',
         'monto',
         'pagado',
+        'total_a_pagar',
         'interes',
         'plazo',
         'estado'

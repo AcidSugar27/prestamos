@@ -18,10 +18,7 @@
                             value="{{ old('cedula') }}"
                             class="form-control @error('cedula') is-invalid @enderror" required>
                         <div class="invalid-feedback">
-                            Formato Invalido: 
-                            @error('cedula')
-                                {{ $message }}
-                            @enderror
+                            Formato Invalido: @error('cedula') {{ $message }} @enderror
                         </div>
                         <div class="valid-feedback">
                             Formato Valido
@@ -43,11 +40,9 @@
                             <input type="number" id="monto" name="monto" placeholder="1000"
                                 value="{{ old('monto') }}" step="1" min="1"
                                 class="form-control @error('monto') is-invalid @enderror" required>
-                            @error('monto')
-                                <div class="invalid-feedback">
-                                    Campo Invalido: {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback">
+                                Campo Invalido: @error('monto') {{ $message }} @enderror
+                            </div>
                             <div class="valid-feedback">
                                 Formato Valido
                             </div>
@@ -80,24 +75,10 @@
     
                             <select class="form-select" name="plazo">
                                 <option selected>Selecciona un plazo</option>
-                                <option value="12">12 mese</option>
+                                <option value="12">12 meses</option>
                                 <option value="18">18 meses</option>
                                 <option value="24">24 meses</option>
                             </select>
-    
-                            {{-- <div class="input-group has-validation">
-                                <input type="numeric" name="plazo" placeholder="24"
-                                    value="{{ old('plazo') }}"
-                                    class="form-control @error('plazo') is-invalid @enderror">
-                                @error('plazo')
-                                    <div class="invalid-feedback">
-                                        El plazo es requerido
-                                    </div>
-                                @enderror
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -132,7 +113,7 @@
                             {
                                 $('#input-NombreDelCliente').addClass('is-valid');
                                 $('#input-NombreDelCliente').removeClass('is-invalid');
-                                $('#input-NombreDelCliente').val(res[0].nombre + ' ' + res[0].apellido);   
+                                $('#input-NombreDelCliente').val(res[0].nombre + ' ' + res[0].apellido);
                             }
                             else
                             {

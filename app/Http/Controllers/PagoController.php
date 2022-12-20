@@ -30,44 +30,35 @@ class PagoController extends Controller
         ]);
         
         $id_prestamo = $request->input('id_prestamo');
-
-        $prestamo   = Prestamo::findOrFail($id_prestamo);
-        $comision   = ($prestamo->monto / 100) * $prestamo->interes; 
-        $deudaTotal = $prestamo->monto + $comision;
         $abono      = $request->input('abono');
 
+        $prestamo   = Prestamo::findOrFail($id_prestamo);
+
+       
+
         // VALIDAMOS SI EL MONTO NO HA SIDO SALDADO (PAGADO EN SU TOTALIDAD)
-        if( $prestamo->pagado < $deudaTotal )
+        if( $prestamo->pagado < $prestamo->total_a_pagar )
         {
-            // VALIDAMOS QUE EL PAGO NO EXCEDA LA CANTIDAD DE LO QUE SE DEBE DE PAGAR
-            if( $prestamo->pagado + $abono <= $deudaTotal)
-            {
-                $pago = new Pago;
-                $pago->id_prestamo = $id_prestamo;
-                $pago->abono = $abono;
-                $pago->save();
-        
-                $prestamo->pagado += $pago->abono;
 
-                // VALIDAMOS SI EL PAGO HA SIDO FINALIZADO
-                if( $deudaTotal == $prestamo->pagado )
-                {
-                    $prestamo->estado = "CERRADO";
-                }
+            $pago = new Pago;
+            $pago->id_prestamo = $id_prestamo;
+            $pago->abono = $abono;
+            $pago->save();
+    
+            $prestamo->pagado += $pago->abono;
 
-                Session::flash('message',"Se abono $pago->abono a el prestamo con ID: $id_prestamo");
-                $prestamo->save();
-            }
-            else
+            // VALIDAMOS SI EL PAGO HA SIDO FINALIZADO
+            if( $prestamo->pagado == $prestamo->total_a_pagar )
             {
-                $saldoRestante = $deudaTotal - $prestamo->pagado;
-                throw ValidationException::withMessages(['abono' => "El saldo restante es de $saldoRestante"]);
+                $prestamo->estado = "CERRADO";
             }
+
+            Session::flash('message',"Se abono $pago->abono a el prestamo con ID: $id_prestamo");
+            $prestamo->save();
         }
         else
         {
             Session::flash('message',"El prestamo NO TIENE ADEUDO");
-            throw ValidationException::withMessages(['abono' => "El saldo restante es de $00.00"]);
         }
 
         return view('page.pago.create');

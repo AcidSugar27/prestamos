@@ -41,3 +41,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/client',[ClienteController::class, 'api']);
 Route::get('/todos-los-clientes',[ApiController::class, 'clientes']);
 Route::get('/prestamos-abiertos',[ApiController::class, 'prestamosAbiertos']);
+Route::get('/prestamo-del-cliente',[ApiController::class, 'prestamoDelCliente']);
+Route::get('/api/prestamo',[ApiController::class, 'prestamo']);

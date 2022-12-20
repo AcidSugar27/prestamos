@@ -45,10 +45,10 @@
                             {{ $prestamo->interes }} %
                         </td>
                         <td class="align-middle">
-                            {{ $prestamo->monto + ($prestamo->monto / 100) * $prestamo->interes }}.00
+                            {{ $prestamo->total_a_pagar }}
                         </td>
                         <td class="align-middle">
-                            {{( $prestamo->monto + ($prestamo->monto / 100) * $prestamo->interes) /  $prestamo->plazo  }}
+                            {{ $prestamo->total_a_pagar /  $prestamo->plazo  }}
                         </td>
                         <td class="align-middle">
                             {{ $prestamo->pagado }}

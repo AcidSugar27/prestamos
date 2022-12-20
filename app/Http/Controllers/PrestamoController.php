@@ -45,6 +45,7 @@ class PrestamoController extends Controller
             $prestamo->monto        = $request->input('monto');
             $prestamo->pagado       = 0;
             $prestamo->interes      = $request->input('interes');
+            $prestamo->total_a_pagar= $prestamo->monto + ($prestamo->monto / 100 * $prestamo->interes );
             $prestamo->plazo        = $request->input('plazo');
             $prestamo->estado       = "ABIERTO";
             $prestamo->save();
