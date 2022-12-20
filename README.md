@@ -45,7 +45,7 @@ CREATE DATABASE laravels;
 ```
 
 o podemos crearla de forma grafica en nuestro phpmyadmin.
-![[Pasted image 20221218185212.png]]
+![MyPhpAdmin](./.screenshots/php.png)
 
 Una vez creado, procedemos a hacer una migración con los siguientes comandos.
 
