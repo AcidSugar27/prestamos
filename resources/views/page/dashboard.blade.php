@@ -5,8 +5,11 @@
         <img src="img/logo.png" width="48" alt="">
     </div>
     <h2 class="fw-blod text-center py-3">Dashboard</h2>
-    <span>de la rtabla prestamos comprar lo que se debe 'pagado' con lo que se ha pagado 'Cantidad a Pagar' y la diferencia ademas debe ser por cada cliente</span>
-    <div id="chart"></div>
+    <span>
+        En la siguiente grafica podemos ver un listado de los clientes con sus respectivas deudas y pagos,
+        asi tambien como la cantidad faltante.
+    </span>
+    <div id="chartDeudas"></div>
 
     <!-- Form -->
     <div class="table-responsive">
@@ -142,16 +145,16 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             
-            var options = {
+            var chartOptions = {
                 series: [{
-                    name: 'Net Profit',
-                    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+                    name: 'Deuda',
+                    data: []
                 }, {
-                    name: 'Revenue',
-                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+                    name: 'Pagado',
+                    data: []
                 }, {
-                    name: 'Free Cash Flow',
-                    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+                    name: 'Faltante',
+                    data: []
                 }],
                 chart: {
                     type: 'bar',
@@ -186,14 +189,45 @@
                 tooltip: {
                     y: {
                         formatter: function(val) {
-                            return "$ " + val + " thousands"
+                            return "$ " + val + ""
                         }
                     }
                 }
             };
 
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
+            var chart = new ApexCharts(document.querySelector("#chartDeudas"), chartOptions);
+
+            $.ajax({
+                dataType: "json",
+                url: `http://127.0.0.1:8000/prestamos-abiertos`,
+                success: function(jsonDocument) {
+                    if (jsonDocument.length > 0)
+                    {
+                        for (var i = 0; i < jsonDocument.length; i++)
+                        {
+                            var jsonObject  = jsonDocument[i];
+                            var deuda       = jsonObject['total_a_pagar'];  //monto
+                            var pagado      = jsonObject['pagado'];
+                            var adeudo      = deuda - pagado;
+
+                            chartOptions.series[0].data.push( deuda );
+                            chartOptions.series[1].data.push( pagado );
+                            chartOptions.series[2].data.push( deuda - pagado );
+
+                        }
+                        chart.render();
+                    }
+                    else
+                    {
+                        console.log('faa');
+                    }
+
+                },
+                error: function(res) {
+                    console.log('No se pudo realizar la peticion AJAX');
+                }
+            });
+
         });
     </script>
 @endpush

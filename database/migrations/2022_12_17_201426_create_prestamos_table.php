@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_cliente');       // ID del cliente que solicito el prestamo
             $table->unsignedDecimal('monto');                       // Cantidad Prestada
+            $table->unsignedDecimal('total_a_pagar');
             $table->unsignedDecimal('pagado');                      // Cantidad Pagada
             $table->unsignedTinyInteger('interes');         // Porcentaje de Interes
             $table->string('plazo', 50);                    // Plazo del prestamo

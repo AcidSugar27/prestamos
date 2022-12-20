@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\ApiController;
 
 Auth::routes();
 
@@ -38,3 +39,5 @@ Route::middleware(['auth'])->group(function () {
 
 // API
 Route::get('/client',[ClienteController::class, 'api']);
+Route::get('/todos-los-clientes',[ApiController::class, 'clientes']);
+Route::get('/prestamos-abiertos',[ApiController::class, 'prestamosAbiertos']);

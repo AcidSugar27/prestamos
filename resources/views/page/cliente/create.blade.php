@@ -147,7 +147,9 @@
 
 @push('JS')
     <script>
+        // CUANDO EL DOCUMENTO HAYA CARGADO
         document.addEventListener("DOMContentLoaded", function(event) {
+            // VALIDAMOS EL INPUT CEDULA CADA VEZ QUE SE DISPARA EL EVENTO ON CHANGE
             $("#cedula").change(function(){
 
                 if( esCedulaValida(this.value) === true )
@@ -161,6 +163,9 @@
                     $("#cedula").removeClass('is-valid');
                 }
             });
+
+            // VALIDAMOS EL INPUT MONTO CADA VEZ QUE SE DISPARA EL EVENTO ON CHANGE
+
         });
     </script>
 @endpush

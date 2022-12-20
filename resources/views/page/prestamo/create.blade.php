@@ -40,16 +40,16 @@
                     <div class="row col-12">
                         <div class="col-sm-3">
                             <label for="apellido" class="form-label">Monto</label>
-                            <input type="number" name="monto" placeholder="1000"
-                                value="{{ old('monto') }}"
+                            <input type="number" id="monto" name="monto" placeholder="1000"
+                                value="{{ old('monto') }}" step="1" min="1"
                                 class="form-control @error('monto') is-invalid @enderror" required>
                             @error('monto')
                                 <div class="invalid-feedback">
-                                    El monto es requerido
+                                    Campo Invalido: {{ $message }}
                                 </div>
                             @enderror
                             <div class="valid-feedback">
-                                Looks good!
+                                Formato Valido
                             </div>
                         </div>
     
@@ -112,7 +112,10 @@
 
 @push('JS')
     <script>
+        // CUANDO EL DOM HAYA CARGADO
         document.addEventListener("DOMContentLoaded", function(event) {
+            
+            // VALIDAMOS EL INPUT CEDULA CUANDO SE DISPARA EL EVENTO ONCHANGE
             $("#cedula").change(function(){
                 var sCedula = this.value;
                 if( esCedulaValida(sCedula) === true )
@@ -124,10 +127,20 @@
                         url: `http://127.0.0.1:8000/client`,
                         data: { "cedula": sCedula },
                         success: function(res)
-                        {   
-                            $('#input-NombreDelCliente').addClass('is-valid');
-                            $('#input-NombreDelCliente').removeClass('is-invalid');
-                            $('#input-NombreDelCliente').val(res[0].nombre + ' ' + res[0].apellido);   
+                        {
+                            if(res.length > 0)
+                            {
+                                $('#input-NombreDelCliente').addClass('is-valid');
+                                $('#input-NombreDelCliente').removeClass('is-invalid');
+                                $('#input-NombreDelCliente').val(res[0].nombre + ' ' + res[0].apellido);   
+                            }
+                            else
+                            {
+                                $('#input-NombreDelCliente').addClass('is-invalid');
+                                $('#input-NombreDelCliente').removeClass('is-valid');
+                                $('#input-NombreDelCliente').val("");
+                            }
+
                         },
                         error: function(res)
                         {
@@ -145,6 +158,21 @@
                     $('#input-NombreDelCliente').addClass('is-invalid');
                     $('#input-NombreDelCliente').removeClass('is-valid');
                     $('#input-NombreDelCliente').val("");
+                }
+            });
+
+            // VALIDAMOS EL INPUT
+            $('#monto').change( function(){
+                
+                if( isNaN($('#monto').val())  )
+                {
+                    $('#monto').addClass('is-invalid');
+                    $('#monto').removeClass('is-valid');
+                }
+                else
+                {
+                    $('#monto').addClass('is-valid');
+                    $('#monto').removeClass('is-invalid');
                 }
             });
         });
